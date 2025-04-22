@@ -38,17 +38,17 @@ const PcInfo = sequelize.define('pc_info', {
 User.hasOne(Basket)
 Basket.belongsTo(User)
 
-User.hasMany(Rating)
-Rating.belongsTo(User)
-
 Basket.hasMany(BasketPc)
 BasketPc.belongsTo(Basket)
 
-Pc.hasMany(Rating)
-Rating.belongsTo(Pc)
-
 Pc.hasMany(BasketPc)
 BasketPc.belongsTo(Pc)
+
+User.hasMany(Rating)
+Rating.belongsTo(User)
+
+Pc.hasMany(Rating)
+Rating.belongsTo(Pc)
 
 Pc.hasMany(PcInfo)
 PcInfo.belongsTo(Pc)
