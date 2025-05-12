@@ -11,7 +11,7 @@ const PcItem = ({pc}) => {
     return (
         <Col md={3} className={"mt-3"} onClick={() => navigate(PC_ROUTE + '/' + pc.id)}>
             <Card style={{width: 158, cursor: 'pointer'}} border={"Light"}>
-                <Image width={150} height={150} src={process.env.REACT_APP_API_URL + pc.img}/>
+                <Image width={150} height={150} src={pc.img}/>
                 <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
                     <div>Игровой ПК</div>
                     <div className="d-flex align-items-center">

@@ -1,20 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import TypeBar from "../components/TypeBar"
 import PcList from '../components/PcList';
-import { Context } from "..";
-import { fetchPcs } from "../http/pcAPI";
-import { data } from "react-router-dom";
 
 
 
 const Shop = () => {
-    const {pc} = useContext(Context)
-
-    useEffect(() => {
-        fetchPcs().then(data => pc.setPcs(data.rows))
-    }, [])
-
     return (
         <Container>
             <Row className="mt-2">
