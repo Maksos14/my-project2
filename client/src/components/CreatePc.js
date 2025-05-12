@@ -2,18 +2,46 @@ import React, { useContext, useState } from "react";
 import { Modal } from "react-bootstrap";
 import {Button, Form, Col, Row} from "react-bootstrap"
 import { Context } from "..";
+import { createPc } from "../http/pcAPI";
+import { observer } from "mobx-react-lite";
 
 
 
-const CreatePc = ({show, onHide}) => {
+const CreatePc = observer(({show, onHide}) => {
     const {pc} = useContext(Context)
+    const [name, setName] = useState('')
+    const [price, setPrice] = useState(0)
+    const [file, setFile] = useState(null)
     const [info, setInfo] = useState([])
+
     const addInfo = () => {
         setInfo([...info, {title: '', description: '', number: Date.now()}])
     }
+
     const removeInfo = (number) => {
         setInfo(info.filter(i => i.number !== number))
     }
+
+    const changeInfo = (key, value, number) => {
+        setInfo(info.map(i => i.number === number ? {...i, [key]: value} : i))
+    }
+
+    const selectFile = e => {
+        setFile(e.target.files[0])
+    }
+
+
+
+    const addPc = () => {
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('price', `${price}`);
+        formData.append('img', file);
+        formData.append('info', JSON.stringify(info));
+        createPc(formData).then(data => onHide());
+}
+
+    
 
     return (
         <Modal
@@ -28,10 +56,14 @@ const CreatePc = ({show, onHide}) => {
             </Modal.Header>
             
             <Form.Control
+                value={name}
+                onChange={e => setName(e.target.value)}
                 className="mt-3"
                 placeholder="Введите название компьютера"
             />
             <Form.Control
+                value={price}
+                onChange={e => setPrice(Number(e.target.value))}
                 className="mt-3"
                 placeholder="Введите стоимость компьютера"
                 type="number"
@@ -39,6 +71,7 @@ const CreatePc = ({show, onHide}) => {
             <Form.Control
                 className="mt-3"
                 type="file"
+                onChange={selectFile}
             />
                 <hr/>
             <Button
@@ -51,11 +84,15 @@ const CreatePc = ({show, onHide}) => {
                 <Row className="mt-4" key={i.number}>
                     <Col md={4}>
                         <Form.Control
+                            value={i.title}
+                            onChange={(e) => changeInfo('title', e.target.value, i.number)}
                             placeholder="Введите название свойства"
                         />
                     </Col>
                     <Col md={4}>
                         <Form.Control
+                            value={i.description}
+                            onChange={(e) => changeInfo('description', e.target.value, i.number)}
                             placeholder="Введите описание свойства"
                         />
                     </Col>
@@ -80,7 +117,7 @@ const CreatePc = ({show, onHide}) => {
                 </Button>
                 <Button 
                     variant="outline-success" 
-                    onClick={onHide}
+                    onClick={addPc}
                 >
                     Добавить
                 </Button>
@@ -88,5 +125,6 @@ const CreatePc = ({show, onHide}) => {
 
         </Modal>
     )
-}
+})
+
 export default CreatePc;

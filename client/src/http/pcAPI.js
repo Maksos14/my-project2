@@ -1,7 +1,6 @@
 import { $authHost, $host } from "./index";
-import axios from "axios";
 
-export const CreatePc = async (pc) => {
+export const createPc = async (pc) => {
     const {data} = await $authHost.post('api/pc', pc)
     return data
 }

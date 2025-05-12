@@ -10,23 +10,13 @@ import axios from "axios";
 
 
 const check = async () => {
-  try {
-    const token = localStorage.getItem("token");
-    if (!token) {
-        console.warn("Токен отсутствует");
-        return null;
+  const response = await axios.get("http://localhost:5000/api/user/auth", {
+    headers: 
+    {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
     }
-
-    const response = await axios.get("http://localhost:5000/api/user/auth", {
-        headers: { Authorization: `Bearer ${token}` }
-    });
-
-    console.log("Ответ сервера:", response.data);
-    return response.data;
-} catch (error) {
-    console.error("Ошибка проверки авторизации:", error.response?.data || error.message);
-    return null;
-}
+  })
+      return response.data;
 };
 
 
