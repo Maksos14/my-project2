@@ -1,46 +1,52 @@
-const { Basket, BasketPc } = require('../models/basket');
+const { Basket, BasketPc, Pc } = require('../models/models');
+
 
 class BasketController {
     async addToBasket(req, res) {
-        try {
-            const { userId, pcId } = req.body;
-            let basket = await Basket.findOne({ where: { userId } });
-
-            if (!basket) {
-                basket = await Basket.create({ userId });
-            }
-
-            const item = await BasketPc.create({ basketId: basket.id, pcId });
-            res.json(item);
-        } catch (error) {
-            res.status(500).json({ message: 'Ошибка при добавлении в корзину', error });
+        const { pcId } = req.body;
+        const userId = req.user.id;
+    
+        // Получаем корзину пользователя
+        let basket = await Basket.findOne({ where: { userId } });
+        if (!basket) {
+            basket = await Basket.create({ userId });
         }
+    
+        // Проверяем, есть ли этот ПК уже в корзине пользователя
+        const existingBasketPc = await BasketPc.findOne({ where: { basketId: basket.id, pcId } });
+    
+        if (existingBasketPc) {
+            return res.status(400).json({ message: "Этот ПК уже добавлен в корзину!" });
+        }
+    
+        // Добавляем ПК только если его ещё нет в корзине
+        const basketPc = await BasketPc.create({
+            basketId: basket.id,
+            pcId,
+        });
+    
+        return res.json(basketPc);
     }
+    
 
     async getBasket(req, res) {
-        try {
-            const { userId } = req.params;
-            const basket = await Basket.findOne({ where: { userId } });
+        const userId = req.user.id;
 
-            if (!basket) {
-                return res.status(404).json({ message: 'Корзина не найдена' });
-            }
+        const basket = await Basket.findOne({
+            where: { userId },
+            include: {
+                model: BasketPc,
+                include: [Pc],
+            },
+        });
 
-            const items = await BasketPc.findAll({ where: { basketId: basket.id } });
-            res.json(items);
-        } catch (error) {
-            res.status(500).json({ message: 'Ошибка при получении корзины', error });
-        }
+        return res.json(basket);
     }
 
     async removeFromBasket(req, res) {
-        try {
-            const { id } = req.params;
-            await BasketPc.destroy({ where: { id } });
-            res.json({ message: 'Товар удален из корзины' });
-        } catch (error) {
-            res.status(500).json({ message: 'Ошибка при удалении товара', error });
-        }
+        const { basketPcId } = req.params;
+        await BasketPc.destroy({ where: { id: basketPcId } });
+        return res.json({ message: 'Удалено из корзины' });
     }
 }
 

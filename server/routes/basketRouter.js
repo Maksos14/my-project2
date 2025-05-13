@@ -1,9 +1,10 @@
 const Router = require('express');
 const router = new Router();
-const BasketController = require('../controllers/basketController');
+const basketController = require('../controllers/basketController');
+const authMiddleware = require('../middleware/authMiddleware');
 
-router.post('/', BasketController.addToBasket);
-router.get('/:userId', BasketController.getBasket);
-router.delete('/:id', BasketController.removeFromBasket);
+router.post('/add', authMiddleware, basketController.addToBasket); // <-- ЭТО важно
+router.get('/', authMiddleware, basketController.getBasket);
+router.delete('/:basketPcId', authMiddleware, basketController.removeFromBasket);
 
 module.exports = router;

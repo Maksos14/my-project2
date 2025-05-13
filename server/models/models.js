@@ -9,12 +9,14 @@ const User = sequelize.define('user', {
 })
 
 const Basket = sequelize.define('basket', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-})
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+});
 
 const BasketPc = sequelize.define('basket_pc', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-})
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    basketId: { type: DataTypes.INTEGER, allowNull: false },
+    pcId: { type: DataTypes.INTEGER, allowNull: false },
+});
 
 const Pc = sequelize.define('pc', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -38,8 +40,8 @@ const PcInfo = sequelize.define('pc_info', {
 User.hasOne(Basket)
 Basket.belongsTo(User)
 
-Basket.hasMany(BasketPc)
-BasketPc.belongsTo(Basket)
+Basket.hasMany(BasketPc, { foreignKey: 'basketId' });
+BasketPc.belongsTo(Basket, { foreignKey: 'basketId' });
 
 Pc.hasMany(BasketPc)
 BasketPc.belongsTo(Pc)
@@ -52,6 +54,8 @@ Rating.belongsTo(Pc)
 
 Pc.hasMany(PcInfo)
 PcInfo.belongsTo(Pc)
+
+
 
 
 module.exports = {
