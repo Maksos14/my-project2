@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Modal } from "react-bootstrap";
 import {Button, Form, Col, Row, Dropdown} from "react-bootstrap"
 import { Context } from "..";
-import { createPc } from "../http/pcAPI";
+import { createPc, fetchPcs } from "../http/pcAPI";
 import { observer } from "mobx-react-lite";
 
 
@@ -33,12 +33,12 @@ const CreatePc = observer(({show, onHide}) => {
 
 
     const addPc = () => {
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('price', `${price}`);
-        formData.append('img', file);
-        formData.append('info', JSON.stringify(info));
-        createPc(formData).then(data => onHide());
+        const formData = new FormData()
+        formData.append('name', name)
+        formData.append('price', `${price}`)
+        formData.append('img', file)
+        formData.append('info', JSON.stringify(info))
+        createPc(formData).then(() => onHide())
 }
 
     

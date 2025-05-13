@@ -4,7 +4,9 @@ import CreatePc from "../components/CreatePc"
 
 
 const Admin = () => {
+    
     const [pcVisible, setPcVisible] = useState(false)
+
     return (
         <Container className="d-flex flex-column">
             <Button 

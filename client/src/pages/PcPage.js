@@ -1,26 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Button, Col, Container, Image} from "react-bootstrap";
 import { Card, Row } from 'react-bootstrap';
-import bigstar from '../assets/bigstar.png'
+import bigstar from '../assets/bigstar.png';
+import { data, useParams } from 'react-router-dom'
+import { fetchOnePc } from "../http/pcAPI";
 
 
 const PcPage = () => {
-    const pc = { id: 1, name: "dsfdsf", price: 25000, rating: 5, img: "https://countryscanner.ru/forum/download/file.php?avatar=3506_1589297431.jpg" }
-    const description = [
-        {id:1, title: 'Процессор', description: 'AMD Ryzen 7 2700x'},
-        {id:2, title: 'Видеокарта', description: 'PALIT RTX 3060 12GB'},
-        {id:3, title: 'Оперативная память', description: '2x16GB DDR4 3200mHz'},
-        {id:4, title: 'SSD накопитель', description: 'NVMe Apacer 512GB'},
-        {id:5, title: 'Материнская плата', description: 'Gigabyte B450M H'},
-        {id:6, title: 'Блок питания', description: '1stPlayer 650W'},
-        {id:7, title: 'Корпус', description: 'HAFF FLASH'},
-        {id:8, title: 'Охлаждение ЦП', description: 'ID-COOLING SE-214'}
-    ]
-       return (
+        const [pc, setPc] = useState({info: []})
+        const {id} = useParams()
+        useEffect(() => {
+            fetchOnePc(id).then(data => setPc(data))
+
+        }, [])
+
+        return (
         <Container className="mt-3">
             <Row>
             <Col md={4}>
-                <Image width={300} height={300} src={pc.img}/>
+                <Image width={300} height={300} src={process.env.REACT_APP_API_URL + pc.img}/>
             </Col>
             <Col md={4}>
                 <Row className="d-flex flex-column align-items-center">
@@ -45,7 +43,7 @@ const PcPage = () => {
             </Row>
             <Row className="d-flex flex-column m-3">
                 <h1>Характеристики:</h1>
-                {description.map(info =>
+                {pc.info?.map(info =>
                     <Row key={info.id}>
                         {info.title}: {info.description}
                     </Row>
