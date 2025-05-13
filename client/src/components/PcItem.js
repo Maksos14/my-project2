@@ -4,23 +4,25 @@ import star from '../assets/star.png'
 import { Image } from 'react-bootstrap';
 import {useNavigate} from 'react-router-dom'
 import { PC_ROUTE } from "../utils/consts";
+import '../styles/epic-card.css'; 
 
 const PcItem = ({pc}) => {
     const navigate = useNavigate()
 
     return (
         <Col md={3} className={"mt-3"} onClick={() => navigate(PC_ROUTE + '/' + pc.id)}>
-            <Card style={{width: 158, cursor: 'pointer'}} border={"Light"}>
-                <Image width={150} height={150} src={process.env.REACT_APP_API_URL + pc.img}/>
-                <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
-                    <div>Игровой ПК</div>
-                    <div className="d-flex align-items-center">
-                        <div>{pc.rating}</div>
-                        <Image width={15} height={15} src={star}/>
-                    </div>
-                                        
+            <Card className="epic-pc-card">
+                <div className="epic-pc-image-container">
+                    <Image className="epic-pc-image" src={process.env.REACT_APP_API_URL + pc.img}/>
                 </div>
-                <div>{pc.name}</div>
+                <div className="epic-pc-content">
+                    <div className="epic-pc-category">Игровой ПК</div>
+                    <div className="epic-pc-rating">
+                        <span>{pc.rating}</span>
+                        <Image className="epic-star" src={star}/>
+                    </div>
+                    <h3 className="epic-pc-name">{pc.name}</h3>
+                </div>
             </Card> 
         </Col>
     )

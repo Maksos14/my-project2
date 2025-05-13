@@ -7,7 +7,7 @@ export const createPc = async (pc) => {
     return data
 }
 
-export const fetchPcs = async (page, limit = 8) => {
+export const fetchPcs = async (page, limit = 5) => {
         const {data} = await $host.get('/api/pc', {params: {
             page, limit
         }});

@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Context } from "../index";
 import { Row } from "react-bootstrap";
 import PcItem from "./PcItem";
+import '../styles/card.css'; 
 
 const PcList = observer(({}) => {
     const {pc} = useContext(Context)

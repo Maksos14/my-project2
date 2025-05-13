@@ -3,6 +3,9 @@ import { Button, Card, Col, Container, ListGroup, Row } from 'react-bootstrap';
 import { Context } from '../index';
 import { getBasket, removeFromBasket } from '../http/basketAPI';
 import { observer } from 'mobx-react-lite';
+import '../styles/epic-cart.css'; 
+import { SHOP_ROUTE } from '../utils/consts';
+import { Link } from 'react-router-dom';
 
 const Basket = observer(() => {
     const { user } = useContext(Context);
@@ -31,53 +34,60 @@ const Basket = observer(() => {
     };
 
     return (
-        <Container className="mt-4">
-            <h2 className="mb-4">Ваша корзина</h2>
+        <Container className="epic-cart-container">
+            <h1 className="epic-cart-title">ВАША КОРЗИНА</h1>
+            
             {basketItems.length > 0 ? (
                 <>
-                    <ListGroup>
-                        {basketItems.map(item => (
-                            <ListGroup.Item key={item.id}>
-                                <Row className="align-items-center">
-                                    <Col md={4}>
-                                        <Card.Img 
-                                            variant="top" 
-                                            src={process.env.REACT_APP_API_URL + item.pc.img}
-                                            style={{ width: '100px' }}
-                                        />
-                                    </Col>
-                                    <Col md={4}>
-                                        <h5>{item.pc.name}</h5>
-                                        <p>{item.pc.price} руб.</p>
-                                    </Col>
-                                    <Col md={4}>
-                                        <Button 
-                                            variant="outline-danger"
-                                            onClick={() => handleRemove(item.id)}
-                                        >
-                                            Удалить
-                                        </Button>
-                                    </Col>
-                                </Row>
-                            </ListGroup.Item>
-                        ))}
-                    </ListGroup>
-                    <div className="mt-3">
-                        <h4>Итого: {total} руб.</h4>
-                        <Button variant="success" size="lg" className="mt-2">
-                            Оформить заказ
-                        </Button>
+                    {basketItems.map(item => (
+                        <div key={item.id} className="epic-cart-item">
+                            <Row className="align-items-center">
+                                <Col md={4}>
+                                    <img
+                                        src={process.env.REACT_APP_API_URL + item.pc.img}
+                                        className="epic-cart-image"
+                                        alt={item.pc.name}
+                                    />
+                                </Col>
+                                <Col md={4}>
+                                    <h5 className="epic-cart-product-name">{item.pc.name}</h5>
+                                    <p className="epic-cart-price">{item.pc.price} руб.</p>
+                                </Col>
+                                <Col md={4}>
+                                    <button 
+                                        className="epic-cart-delete-btn"
+                                        onClick={() => handleRemove(item.id)}
+                                    >
+                                        Удалить
+                                    </button>
+                                </Col>
+                            </Row>
+                        </div>
+                    ))}
+                    
+                    <hr className="epic-cart-divider" />
+                    
+                    <div className="epic-cart-total">
+                        <span>Итого:</span>
+                        <span className="epic-cart-total-price">{total} руб.</span>
                     </div>
+                    
+                    <button className="epic-cart-checkout-btn">
+                        Оформить заказ
+                    </button>
                 </>
             ) : (
-                <Card>
-                    <Card.Body>
-                        <Card.Title>Корзина пуста</Card.Title>
-                        <Card.Text>
-                            Добавьте товары из каталога
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
+                <Card className="epic-empty-cart">
+        <Card.Body>
+            <Card.Title className="epic-empty-title">КОРЗИНА ПУСТА</Card.Title>
+            <Card.Text className="epic-empty-text">
+                Добавьте товары из каталога
+            </Card.Text>
+            <Link to={SHOP_ROUTE} className="epic-empty-btn">
+                Перейти в каталог
+            </Link>
+        </Card.Body>
+    </Card>
             )}
         </Container>
     );
