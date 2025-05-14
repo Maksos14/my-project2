@@ -21,7 +21,7 @@ const Shop = observer( () => {
     }, []);
     
     useEffect(() => {
-        fetchPcs(pc.page).then(data => {
+        fetchPcs(pc.page, 8).then(data => {
             pc.setPcs(data.rows);
             pc.setTotalCount(data.count);
         });

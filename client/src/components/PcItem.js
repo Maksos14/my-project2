@@ -17,11 +17,11 @@ const PcItem = ({pc}) => {
                 </div>
                 <div className="epic-pc-content">
                     <div className="epic-pc-category">Игровой ПК </div>
+                    <h3 className="epic-pc-name">{pc.name}</h3>
                     <div className="epic-pc-rating">
                         <span>{pc.rating}</span>
                         <Image className="epic-star" src={star}/>
                     </div>
-                    <h3 className="epic-pc-name">{pc.name}</h3>
                     <h4 className="epic-pc-name">от {pc.price} BYN</h4>
                     <div className="epic-pc-rassrochka">или от {(Number(pc.price)/36).toFixed(2)} BYN/мес</div>
                 </div>

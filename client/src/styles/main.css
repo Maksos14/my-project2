@@ -13,3 +13,17 @@
   .blackNavbar .navbar-toggler {
     border-color: rgba(255,255,255,0.5); /* Цвет иконки "бургер" */
   }
+
+  .card, .modal-content, .dropdown-menu, 
+.list-group-item, .form-control, 
+.table, .bg-white, .navbar {
+  background-color: #000 !important;
+  border-color: #333 !important;
+  color: #fff !important;
+}
+
+input, textarea, select {
+  background-color: #111 !important;
+  color: #fff !important;
+  border: 1px solid #333 !important;
+}

@@ -1,12 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Button, Col, Container, Image, Card, Row, Form } from "react-bootstrap";
-import bigstar from '../assets/bigstar.png';
 import { useParams } from 'react-router-dom';
 import { fetchOnePc } from "../http/pcAPI";
 import { addToBasket, getBasket, removeFromBasket } from '../http/basketAPI';
 import { createRating, getRatingsByPc } from '../http/ratingAPI';
 import { Alert } from "react-bootstrap";
 import { Context } from "../index";
+import "../styles/main.css";
+import "../styles/pcShop.css";
+import star from '../assets/star.png'
 
 const PcPage = () => {
     const [pc, setPc] = useState({ info: [] });
@@ -128,49 +130,75 @@ const PcPage = () => {
         ));
     };
 
+    const calculateAverageRating = () => {
+    if (ratings.length === 0) return 0;
+    
+    const sum = ratings.reduce((total, rating) => total + Number(rating.rate), 0);
+    const average = sum / ratings.length;
+    
+
+    return Math.round(average * 10) / 10;
+};
+
     return (
         <Container className="mt-3">
-            <Row>
-                <Col md={4}>
-                    <Image width={300} height={300} src={process.env.REACT_APP_API_URL + pc.img} />
-                </Col>
-                <Col md={4}>
-                    <Row className="d-flex flex-column align-items-center">
-                        <h2>{pc.name}</h2>
-                        <div
-                            className="d-flex align-items-center justify-content-center"
-                            style={{background: `url(${bigstar}) no-repeat center`, width: 240, height: 240, backgroundSize: 'cover', fontSize:64}}
-                        >
-                            {pc.rating}
-                        </div>
-                    </Row>
-                </Col>
-                <Col md={4}>
-                    <Card
-                        className="d-flex flex-column align-items-center justify-content-around"
-                        style={{ width: 300, height: 300, fontSize: 32, border: '5px solid lightgray' }}
-                    >
-                        <h3>От: {pc.price} BYN.</h3>
-                        {isInBasket ? (
-                            <Button variant="outline-dark" onClick={handleRemoveFromBasket}>
-                                В корзине 
-                            </Button>
-                        ) : (
-                            <Button variant="outline-dark" onClick={handleAddToBasket}>
-                                Добавить в корзину
-                            </Button>
-                        )}
-                    </Card>
-                </Col>
-            </Row>
-            <Row className="d-flex flex-column m-3">
-                <h1>Характеристики:</h1>
-                {pc.info?.map(info =>
-                    <Row key={info.id}>
-                        {info.title}: {info.description}
-                    </Row>
-                )}
-            </Row>
+           <Row>
+    {/* Колонка с фото (увеличено) */}
+    <Col md={5}>
+      <Image 
+        width={350}
+        height={350} 
+        src={process.env.REACT_APP_API_URL + pc.img}
+        className="mb-3"
+      />
+    </Col>
+
+    {/* Колонка с информацией */}
+    <Col md={7}>
+      <h2 className="mb-3">{pc.name}</h2>
+      
+      {/* Рейтинг */}
+     <div className="mb-3">
+  {Array.from({ length: 5 }).map((_, i) => {
+    const avgRating = calculateAverageRating();
+    return (
+      <span 
+        key={i} 
+        className={i < Math.round(avgRating) ? "text-warning" : "text-muted"}
+      >
+        {i < Math.round(avgRating) ? '★' : '☆'}
+      </span>
+    );
+  })}
+  <span className="ml-2">{calculateAverageRating()}</span>
+  <div className="text-muted">({ratings.length} отзывов)</div>
+</div>
+
+      {/* Цена и кнопка */}
+      <div className="mb-4">
+        <h4>От: {pc.price} BYN</h4>
+        {isInBasket ? (
+          <Button variant="outline-danger" onClick={handleRemoveFromBasket}>
+            В корзине
+          </Button>
+        ) : (
+          <Button variant="outline-success" onClick={handleAddToBasket}>
+            Добавить в корзину
+          </Button>
+        )}
+      </div>
+
+      {/* Характеристики */}
+      <div className="mt-4">
+        <h4>Характеристики:</h4>
+        {pc.info?.map(info => (
+          <div key={info.id}>
+            <strong>{info.title}:</strong> {info.description}
+          </div>
+        ))}
+      </div>
+    </Col>
+  </Row>
 
 
             <Row className="mt-4">
@@ -192,7 +220,7 @@ const PcPage = () => {
                                     />
                                 </Form.Group>
                                 <Form.Group className="mb-3">
-                                    <Form.Label>Оценка (1-5) *</Form.Label>
+                                    <Form.Label>Оценка (1-5) </Form.Label>
                                     <Form.Select
                                         name="value"
                                         value={newRating.value}
@@ -208,7 +236,7 @@ const PcPage = () => {
                                     </Form.Select>
                                 </Form.Group>
                                 <Form.Group className="mb-3">
-                                    <Form.Label>Комментарий</Form.Label>
+                                    <Form.Label>Комментарий (не менее 20 символов)</Form.Label>
                                     <Form.Control
                                         as="textarea"
                                         rows={3}
