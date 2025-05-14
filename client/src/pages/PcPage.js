@@ -8,7 +8,6 @@ import { Alert } from "react-bootstrap";
 import { Context } from "../index";
 import "../styles/main.css";
 import "../styles/pcShop.css";
-import star from '../assets/star.png'
 
 const PcPage = () => {
     const [pc, setPc] = useState({ info: [] });
@@ -143,21 +142,21 @@ const PcPage = () => {
     return (
         <Container className="mt-3">
            <Row>
-    {/* Колонка с фото (увеличено) */}
+
     <Col md={5}>
       <Image 
-        width={350}
-        height={350} 
+        width={400}
+        height={400} 
         src={process.env.REACT_APP_API_URL + pc.img}
         className="mb-3"
       />
     </Col>
 
-    {/* Колонка с информацией */}
+
     <Col md={7}>
       <h2 className="mb-3">{pc.name}</h2>
       
-      {/* Рейтинг */}
+
      <div className="mb-3">
   {Array.from({ length: 5 }).map((_, i) => {
     const avgRating = calculateAverageRating();
@@ -170,13 +169,14 @@ const PcPage = () => {
       </span>
     );
   })}
-  <span className="ml-2">{calculateAverageRating()}</span>
-  <div className="text-muted">({ratings.length} отзывов)</div>
+  <span className="rating-value ml-2">{calculateAverageRating()}</span>
+  <div className="reviews-count">({ratings.length} отзывов)</div>
 </div>
 
-      {/* Цена и кнопка */}
+
       <div className="mb-4">
         <h4>От: {pc.price} BYN</h4>
+        <div className="epic-pc-rassrochka">или от {(Number(pc.price)/36).toFixed(2)} BYN/мес</div>
         {isInBasket ? (
           <Button variant="outline-danger" onClick={handleRemoveFromBasket}>
             В корзине
@@ -187,18 +187,16 @@ const PcPage = () => {
           </Button>
         )}
       </div>
-
-      {/* Характеристики */}
-      <div className="mt-4">
-        <h4>Характеристики:</h4>
-        {pc.info?.map(info => (
-          <div key={info.id}>
-            <strong>{info.title}:</strong> {info.description}
-          </div>
-        ))}
-      </div>
-    </Col>
-  </Row>
+          <div className="mt-4">
+                 <h4>Характеристики:</h4>
+                    {pc.info?.map(info => (
+                      <div key={info.id}>
+                      <strong>{info.title}:</strong> {info.description}
+                   </div>
+                     ))}
+                </div>
+            </Col>
+           </Row>
 
 
             <Row className="mt-4">

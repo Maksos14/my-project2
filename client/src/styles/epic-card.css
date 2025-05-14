@@ -60,6 +60,7 @@
     font-size: 12px;
     text-transform: shiftcase;
     letter-spacing: 1px;
+    margin-bottom: 20px;
 }
 
 .epic-pc-name {
@@ -84,4 +85,55 @@
     width: 15px;
     height: 15px;
     filter: drop-shadow(0 0 2px gold);
+}
+
+.epic-pc-rating {
+    margin: 7px 0;
+}
+
+.stars-and-rating {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.star-filled, .star-empty {
+    font-size: 14px;
+    line-height: 1;
+}
+
+.star-filled {
+    color: #FFB400;
+}
+
+.star-empty {
+    color: #e0e0e0;
+}
+
+.rating-value {
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 2px;
+    color: #fff200;
+}
+
+.reviews-count {
+    font-size: 15px;
+    font-weight: 500;
+    color: #888;
+}
+
+.epic-pc-name {
+    font-size: 15px;
+    margin: 3px 0;
+}
+
+.epic-pc-category {
+    font-size: 12px;
+    color: #666;
+}
+
+.rassrochka {
+    font-size: 12px;
+    color: #666;
 }
