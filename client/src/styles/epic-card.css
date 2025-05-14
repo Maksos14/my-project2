@@ -1,7 +1,7 @@
 /* epic-card.css */
 .epic-pc-card {
     width: 200px;
-    height: 270px !important;
+    height: 310px !important;
     cursor: pointer;
     border: none !important;
     border-radius: 15px !important;
@@ -52,6 +52,13 @@
     color: #aaa;
     font-size: 12px;
     text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.epic-pc-rassrochka {
+    color: #aaa;
+    font-size: 12px;
+    text-transform: shiftcase;
     letter-spacing: 1px;
 }
 

@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import UserStore from "./store/UserStore";
 import PcStore from "./store/PcStore";
-import './styles/index.css'; // Эта строка должна быть
+import './styles/index.css'; 
 export const Context = createContext(null);
 
 const root = ReactDOM.createRoot(

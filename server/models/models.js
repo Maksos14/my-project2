@@ -29,6 +29,10 @@ const Pc = sequelize.define('pc', {
 const Rating = sequelize.define('rating', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     rate: {type: DataTypes.INTEGER, allowNull: false},
+    userName: { type: DataTypes.STRING, allowNull: false },  
+    comment: { type: DataTypes.TEXT, allowNull: true },      
+    userId: { type: DataTypes.INTEGER, allowNull: false },
+    pcId: { type: DataTypes.INTEGER, allowNull: false } 
 })
 
 const PcInfo = sequelize.define('pc_info', {
