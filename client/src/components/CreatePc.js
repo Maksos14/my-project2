@@ -32,14 +32,21 @@ const CreatePc = observer(({show, onHide}) => {
 
 
 
-    const addPc = () => {
-        const formData = new FormData()
-        formData.append('name', name)
-        formData.append('price', `${price}`)
-        formData.append('img', file)
-        formData.append('info', JSON.stringify(info))
-        createPc(formData).then(() => onHide())
-}
+    const addPc = async () => {
+        console.log("1 проверка")
+    try {
+        const formData = new FormData();
+        formData.append("name", name);
+        formData.append("price", `${price}`);
+        formData.append("img", file);
+        formData.append("info", JSON.stringify(info));
+        await createPc(formData);
+        onHide();
+    } catch (error) {
+        console.error("Ошибка добавления ПК:", error.response?.data || error.message);
+    }
+};
+
 
     
 

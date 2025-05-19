@@ -1,5 +1,4 @@
-
-import React, { useEffect, useState, useContext} from "react";
+import { useEffect, useState, useContext} from "react";
 import {BrowserRouter, data} from 'react-router-dom'
 import AppRouter from "./components/AppRouter";
 import NavBar from "./components/NavBar";
@@ -26,11 +25,13 @@ const App = observer(() => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-      check().then(data => {
-        user.setUser(data)
-        user.setIsAuth(true)
-      }).finally(() => setLoading(false))
-  }, [])
+    check().then(data => {
+        user.setUser(data);
+        user.setIsAuth(true);
+        user.setRole(data.role);
+    }).finally(() => setLoading(false))
+}, []);
+
 
   if (loading) {
     return <Spinner animation="grow"/>

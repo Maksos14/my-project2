@@ -46,9 +46,19 @@ class UserController {
     }
 
     async check(req, res, next) {
-        const token = generateJwt(req.user.id, req.user.email, req.user.role)
-        return res.json({token})
+    try {
+        const user = await User.findOne({ where: { id: req.user.id } });
+        if (!user) {
+            return next(ApiError.internal('Пользователь не найден'));
+        }
+        console.log("🔥 USER DATA FROM REQUEST:", req.user); 
+        const token = generateJwt(user.id, user.email, user.role);
+        return res.json({ token, user: { id: user.id, email: user.email, role: user.role } });
+    } catch (error) {
+        return next(ApiError.internal('Ошибка сервера'));
     }
+}
+
 }
 
 module.exports = new UserController();

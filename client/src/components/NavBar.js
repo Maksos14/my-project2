@@ -6,9 +6,10 @@ import { BASKET_ROUTE, LOGIN_ROUTE, SHOP_ROUTE, ADMIN_ROUTE } from '../utils/con
 import { observer } from 'mobx-react-lite';
 import { getBasket } from '../http/basketAPI';
 import { createPc } from '../http/pcAPI';
+import About from '../pages/About';
 import "../styles/navbar.css";
 import "../styles/main.css";
-import { FaShoppingCart, FaSignOutAlt, FaSignInAlt, FaPlusCircle} from "react-icons/fa";
+import { FaShoppingCart, FaQuestion, FaSignOutAlt, FaSignInAlt, FaPlusCircle, FaUserCheck} from "react-icons/fa";
 
 
 
@@ -26,6 +27,7 @@ const NavBar = observer(() => {
         if (user.isAuth) {
             getBasket().then(data => {
                 setBasketCount(data.basket_pcs?.length || 0);
+
             });
         }
     }, [user.isAuth]);
@@ -34,6 +36,8 @@ const NavBar = observer(() => {
         user.setUser({});
         user.setIsAuth(false);
         localStorage.removeItem('token');
+        localStorage.removeItem('userRole');
+        navigate(LOGIN_ROUTE);
     };
 
     const addSpec = () => {
@@ -68,6 +72,10 @@ const NavBar = observer(() => {
         });
     };
 
+    console.log("🔥 USER IN NAVBAR:", user);
+console.log("🔥 USER ROLE IN NAVBAR:", user.user?.role);
+
+
     return (
         <>
             <Navbar className="styles.blackNavbar">
@@ -85,6 +93,7 @@ const NavBar = observer(() => {
                         <Nav className="ml-auto" style={{color: 'white'}}>
                             {user.user.role === 'ADMIN' && 
                             <div className="nav-buttons mr-2">
+                                
                                 <Button 
                                     variant="outline-light" 
                                     className="me-2"
@@ -94,9 +103,17 @@ const NavBar = observer(() => {
                                 </Button>
                                 </div>
                             }
-                            <div className="nav-buttons mr-2">
+                            <div className='nav-buttons mr-2'>
+                             <Button 
+                                variant="outline-light" 
+                                onClick={() => navigate('/about')}
+                            >
+                                <FaUserCheck/>
+                            </Button>
+                            </div>
+                            <div className="nav-buttons">
                             <Button 
-                                className="me-2"
+                                className="me-1"
                                 variant="outline-light" 
                                 onClick={() => navigate(BASKET_ROUTE)}
                             >
@@ -107,8 +124,9 @@ const NavBar = observer(() => {
                                     </Badge>
                                 )}
                             </Button>
+                           
                             </div>
-                            <div className="nav-buttons mr-2">
+                            <div className="nav-buttons mr-2 ml-2">
                             <Button 
                                 
                                 variant="outline-light" 
@@ -127,6 +145,7 @@ const NavBar = observer(() => {
                             >
                                 <FaSignInAlt/>
                             </Button>
+                            
                             </div>
                         </Nav>
                     }

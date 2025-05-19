@@ -3,7 +3,7 @@ import { authRoutes, publicRoutes } from '../routes';
 import { SHOP_ROUTE } from '../utils/consts';
 import { useContext, useEffect } from 'react';
 import { Context } from '../index';
-import { check } from '../http/userAPI';
+import About from "../pages/About";
 
 
 
@@ -21,6 +21,7 @@ const AppRouter = () => {
            <Route key={path} path={path} element={<Component/>} exact />
         )}
             <Route path="*" element={<Navigate to={SHOP_ROUTE} />}/>
+            <Route path="/about" element={<About />} />
      </Routes>
     );
     

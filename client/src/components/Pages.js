@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 import {Pagination} from "react-bootstrap";
+import '../styles/pages.css'
 
 const Pages = observer(() => {
     const {pc} = useContext(Context)
@@ -12,11 +13,14 @@ const Pages = observer(() => {
         pages.push(i + 1)
     }
 
+
+    
     return (
         <Pagination className="mt-3">
             {pages.map(page =>
                 <Pagination.Item 
                     key={page}
+                    className="selected"
                     active={pc.page === page}
                     onClick={() => pc.setPage(page)}
                 >
