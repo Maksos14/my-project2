@@ -6,7 +6,7 @@ export default class UserStore {
         this._user = {};
         this._role = null;
         
-        this._initFromStorage(); // Выносим инициализацию в отдельный метод
+        this._initFromStorage(); 
         makeAutoObservable(this);
     }
 

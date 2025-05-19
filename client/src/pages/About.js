@@ -7,7 +7,7 @@ const About = () => {
     return (
         <div className="about-page">
             <Container>
-                {/* Заголовок */}
+
                 <Row className="mb-5">
                     <Col>
                         <h1 className="about-title">О компании CustomPC</h1>
@@ -15,7 +15,7 @@ const About = () => {
                     </Col>
                 </Row>
 
-                {/* Блок 1 - О нас */}
+
                 <Row className="about-section mb-5">
                     <Col md={6}>
                         <h2 className="section-title">Более 5 лет на рынке</h2>
@@ -26,7 +26,7 @@ const About = () => {
                         </p>
                     </Col>
                     <Col md={6}>
-                        <img className='image' src={logo} />
+                        <img className='about-image' src={logo} />
                     </Col>
                 </Row>
 
@@ -44,7 +44,6 @@ const About = () => {
                     <Col md={6} className="order-md-1">
                         <img 
                             src="https://i0.wp.com/hyperpc.ru/images/company/tour/watercooling_assembly/update/hyperpc_assembly_custom_block_05.jpg?ssl=1" 
-                            alt="Качественная сборка" 
                             className="about-image"
                         />
                     </Col>
@@ -55,7 +54,6 @@ const About = () => {
                     <Col md={6} className="order-md-2">
                         <img 
                             src="https://pcstonks.ru/upload/cache/w-3000/images/portfolio/15/image3.jpg" 
-                            alt="Качественная сборка" 
                             className="about-image"
                         />
                     </Col>
@@ -102,7 +100,6 @@ const About = () => {
                     <Col md={6} className="order-md-1">
                         <img 
                             src="https://sun9-72.userapi.com/impg/vAv_34KvTSnBvSmEDpcclcMTSWtXtQAYh8d3ng/sYesmkaMzRw.jpg?size=807x605&quality=95&sign=9be3768acd1704c3c7e8256309ce635b&type=album" 
-                            alt="Наш магазин" 
                             className="about-image"
                         />
                     </Col>

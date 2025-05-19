@@ -42,7 +42,7 @@ class UserController {
             return next(ApiError.internal('Указан неверный пароль'))
         }
         const token = generateJwt(user.id, user.email, user.role)
-        return res.json({token, userId: user.id})
+        return res.json({token, user: {id: user.id, email: user.email, role: user.role}})
     }
 
     async check(req, res, next) {
@@ -51,7 +51,6 @@ class UserController {
         if (!user) {
             return next(ApiError.internal('Пользователь не найден'));
         }
-        console.log("🔥 USER DATA FROM REQUEST:", req.user); 
         const token = generateJwt(user.id, user.email, user.role);
         return res.json({ token, user: { id: user.id, email: user.email, role: user.role } });
     } catch (error) {
