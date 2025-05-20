@@ -1,9 +1,9 @@
 const Router = require('express')
 const router = new Router()
 const pcController = require('../controllers/pcController')
-const chechRole = require('../middleware/checkRoleMiddleware')
+const checkRole = require('../middleware/checkRoleMiddleware')
 
-router.post('/',chechRole('ADMIN'), pcController.create)
+router.post('/', checkRole('ADMIN'), pcController.create)
 router.get('/', pcController.getAll)
 router.get('/:id', pcController.getOne)
 

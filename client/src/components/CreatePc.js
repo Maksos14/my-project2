@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Modal } from "react-bootstrap";
 import {Button, Form, Col, Row, Dropdown} from "react-bootstrap"
-import { Context } from "..";
+import { Context } from "../index";
 import { createPc, fetchPcs } from "../http/pcAPI";
 import { observer } from "mobx-react-lite";
 
@@ -33,17 +33,23 @@ const CreatePc = observer(({show, onHide}) => {
 
 
     const addPc = async () => {
-        console.log("1 проверка")
     try {
         const formData = new FormData();
         formData.append("name", name);
-        formData.append("price", `${price}`);
+        formData.append("price", price);
         formData.append("img", file);
-        formData.append("info", JSON.stringify(info));
+        
+
+        for (let [key, value] of formData.entries()) {
+            console.log(key, value);
+        }
+
         await createPc(formData);
+
         onHide();
     } catch (error) {
-        console.error("Ошибка добавления ПК:", error.response?.data || error.message);
+        console.log(error)
+
     }
 };
 
