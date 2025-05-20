@@ -1,0 +1,221 @@
+/* epic-cart.css */
+.epic-cart-container {
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+    border-radius: 20px;
+    border: 2px solid;
+    border-image: linear-gradient(45deg, #3228ff, #0080ff, #00ccff) 1;
+    box-shadow: 0 10px 30px rgba(0, 195, 255, 0.2);
+    padding: 30px;
+    color: white;
+    max-width: 800px;
+    margin: 40px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.epic-cart-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #1313ff, #0095ff, #00bfff);
+}
+
+.epic-cart-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    background: linear-gradient(to right, #ffffff, #cccccc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    margin-bottom: 30px;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.epic-cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 15px;
+    background: rgba(30, 30, 30, 0.7);
+    border-radius: 12px;
+    border-left: 3px solid #00ccff;
+    transition: all 0.3s ease;
+}
+
+.epic-cart-item:hover {
+    background: rgba(50, 50, 50, 0.7);
+    transform: translateX(10px);
+}
+
+.epic-cart-product-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #f5f5f5;
+    flex-grow: 1;
+}
+
+.epic-cart-delete-btn {
+    background: linear-gradient(45deg, #0080ff, #00eeff);
+    border: none;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(46, 129, 255, 0.3);
+}
+
+.epic-cart-delete-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 204, 255, 0.4);
+}
+
+.epic-cart-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00b7ff, transparent);
+    margin: 25px 0;
+    border: none;
+}
+
+.epic-cart-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 30px 0;
+    padding: 0 20px;
+}
+
+.epic-cart-total-price {
+    color: #00fffb;
+    font-size: 2rem;
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+}
+
+.epic-cart-checkout-btn {
+    display: block;
+    width: 100%;
+    background: linear-gradient(45deg, #00bbff, #00b3ff);
+    border: none;
+    color: #111;
+    padding: 15px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 25px rgba(0, 255, 204, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.epic-cart-checkout-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0, 255, 204, 0.5);
+}
+
+/* Анимации */
+@keyframes cartItemAppear {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.epic-cart-item {
+    animation: cartItemAppear 0.5s ease forwards;
+}
+
+/* Обновленные стили для картинок */
+.epic-cart-image {
+    width: 120px;
+    height: 120px;
+    object-fit: contain; /* Меняем cover на contain */
+    background-color: #2a2a2a; /* Фон для прозрачных изображений */
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    padding: 10px; /* Отступ внутри */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Стиль для товаров без изображения */
+.epic-cart-no-image {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(45deg, #2a2a2a, #1a1a1a);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-weight: bold;
+    border: 2px dashed #444;
+}
+
+/* Стили для пустой корзины */
+.epic-empty-cart {
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%) !important;
+    border-radius: 20px !important;
+    border: 2px solid;
+    border-image: linear-gradient(45deg, #0062ff, #00b3ff, #00ddff) 1 !important;
+    box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2) !important;
+    padding: 40px !important;
+    text-align: center;
+    margin-top: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.epic-empty-cart::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #007bff, #00b6fe, #00d0ff);
+}
+
+.epic-empty-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem !important;
+    background: linear-gradient(to right, #ffffff, #cccccc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.epic-empty-text {
+    font-size: 1.2rem;
+    color: #aaa;
+    margin-bottom: 30px;
+}
+
+.epic-empty-btn {
+    background: linear-gradient(45deg, #00bfff, #00b3ff);
+    border: none;
+    color: #111 !important;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 25px rgba(0, 255, 204, 0.3);
+    text-decoration: none !important;
+    display: inline-block;
+}
+
+.epic-empty-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0, 255, 204, 0.5);
+}

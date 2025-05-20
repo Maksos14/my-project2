@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState, useContext} from "react";
+import {BrowserRouter, data} from 'react-router-dom'
+import AppRouter from "./components/AppRouter";
+import NavBar from "./components/NavBar";
+import { observer } from "mobx-react-lite";
+import { Context } from ".";
+import { Spinner } from "react-bootstrap";
+import axios from "axios";
 
-function App() {
+
+const check = async () => {
+  const response = await axios.get("http://localhost:5000/api/user/auth", {
+    headers: 
+    {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  })
+      return response.data;
+};
+
+
+
+const App = observer(() => {
+  const {user} = useContext(Context)
+  const [loading, setLoading] = useState(true)
+
+useEffect(() => {
+    check().then(data => {
+        user.setUser(data.user);
+        user.setIsAuth(true);
+        user.setRole(data.user.role);
+    }).finally(() => setLoading(false))
+}, []);
+
+
+  if (loading) {
+    return <Spinner animation="grow"/>
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+          <NavBar />
+          <AppRouter />
+    </BrowserRouter>
   );
-}
+})
 
 export default App;

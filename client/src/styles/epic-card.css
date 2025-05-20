@@ -1,0 +1,139 @@
+/* epic-card.css */
+.epic-pc-card {
+    width: 200px;
+    height: 310px !important;
+    cursor: pointer;
+    border: none !important;
+    border-radius: 15px !important;
+    overflow: hidden;
+    background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.epic-pc-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 194, 248, 0.2);
+}
+
+.epic-pc-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right, #049fff, #05eaea, #00fff7);
+}
+
+.epic-pc-image-container {
+    padding: 10px;
+    background: #000;
+}
+
+.epic-pc-image {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.epic-pc-card:hover .epic-pc-image {
+    transform: scale(1.05);
+}
+
+.epic-pc-content {
+    padding: 15px;
+    color: white;
+}
+
+.epic-pc-category {
+    color: #aaa;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.epic-pc-rassrochka {
+    color: #aaa;
+    font-size: 12px;
+    text-transform: shiftcase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.epic-pc-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 5px;
+    background: linear-gradient(to right, #ffffff, #eeeeee);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.epic-pc-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: gold;
+    font-weight: bold;
+}
+
+.epic-star {
+    width: 15px;
+    height: 15px;
+    filter: drop-shadow(0 0 2px gold);
+}
+
+.epic-pc-rating {
+    margin: 7px 0;
+}
+
+.stars-and-rating {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.star-filled, .star-empty {
+    font-size: 14px;
+    line-height: 1;
+}
+
+.star-filled {
+    color: #FFB400;
+}
+
+.star-empty {
+    color: #e0e0e0;
+}
+
+.rating-value {
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 2px;
+    color: #fff200;
+}
+
+.reviews-count {
+    font-size: 15px;
+    font-weight: 500;
+    color: #888;
+}
+
+.epic-pc-name {
+    font-size: 15px;
+    margin: 3px 0;
+}
+
+.epic-pc-category {
+    font-size: 12px;
+    color: #666;
+}
+
+.rassrochka {
+    font-size: 12px;
+    color: #666;
+}

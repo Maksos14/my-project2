@@ -1,0 +1,29 @@
+
+.blackNavbar {
+    background-color: #000000 !important; /* Чёрный цвет */
+    padding: 15px 0; /* Отступы внутри навбара */
+    border-bottom: 1px solid #333; /* Тонкая серая граница снизу */
+  }
+  
+  .blackNavbar .navbar-brand,
+  .blackNavbar .nav-link {
+    color: white !important; /* Белый цвет текста */
+  }
+  
+  .blackNavbar .navbar-toggler {
+    border-color: rgba(255,255,255,0.5); /* Цвет иконки "бургер" */
+  }
+
+  .card, .modal-content, .dropdown-menu, 
+.list-group-item, .form-control, 
+.table, .bg-white, .navbar {
+  background-color: #000 !important;
+  border-color: #333 !important;
+  color: #fff !important;
+}
+
+input, textarea, select {
+  background-color: #111 !important;
+  color: #fff !important;
+  border: 1px solid #333 !important;
+}

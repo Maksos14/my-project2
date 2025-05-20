@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap");
+
+nav {
+    position: fixed; 
+    
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    background-color: #000; 
+    padding: 15px 0; 
+    z-index: 1030; 
+    box-shadow: 0 2px 10px rgba(0, 242, 255, 0.3); 
+}
+
+body {
+    padding-top: 70px; 
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center; 
+    align-items: center;
+}
+
+.nav-buttons button {
+    background: var(--accent);
+    background-color: #000000f8;
+    color: var(--background);
+    border: none;
+    padding: 5px 8px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.2s;
+    font-family: 'Orbitron', sans-serif; 
+}
+
+.nav-buttons button:hover {
+    background: #00f2ff;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #00f2ff; 
+}
+
+.nav-buttons-in-basket {
+    display: flex;
+    gap: 20px;
+    justify-content: center; 
+    align-items: center;
+}
+
+.nav-buttons-in-basket button {
+    background: var(--accent);
+    background-color: #000000f8;
+    color: var(--background);
+    border: none;
+    padding: 5px 8px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.2s;
+    font-family: 'Orbitron', sans-serif; 
+}
+
+.nav-buttons-in-basket button:hover {
+    background: #0048ff;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #007bff; 
+}
+
+
+.star-filled {
+  color: #FFB400;
+  font-size: 1.2rem;
+  margin-right: 2px;
+}
+
+.star-empty {
+  color: #E0E0E0; 
+  font-size: 1.2rem;
+  margin-right: 2px;
+}
+img {
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+h2 {
+  font-size: 2.8rem;
+}
+
+h4 {
+  font-size: 1.3rem;
+  margin-bottom: 0rem;
+}
+
+.rating-value {
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 2px;
+    color: #fff200;
+}
+
+.reviews-count {
+    font-size: 15px;
+    font-weight: 500;
+    color: #888;
+}

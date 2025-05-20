@@ -1,0 +1,119 @@
+
+.about-page {
+    background-color: #000;
+    color: #fff;
+    min-height: 100vh;
+    padding: 50px 0;
+}
+
+.about-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.title-divider {
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(to right, #00bfff, #00fff7);
+    margin: 0 auto 30px;
+}
+
+.about-section {
+    padding: 30px 0;
+    align-items: center;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #fff;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: #00bfff;
+}
+
+.section-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
+
+.about-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.about-image:hover {
+    transform: scale(1.02);
+}
+
+
+.advantages-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.advantages-list li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: #ccc;
+}
+
+.advantages-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #00eeff;
+    font-weight: bold;
+}
+
+.image {
+
+    height: 350px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .about-title {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .about-section {
+        text-align: center;
+    }
+    
+    .advantages-list li::before {
+        display: none;
+    }
+    
+    .about-image {
+        margin-top: 20px;
+    }
+}
