@@ -38,7 +38,7 @@ const CreatePc = observer(({show, onHide}) => {
         formData.append("name", name);
         formData.append("price", price);
         formData.append("img", file);
-        
+        formData.append("info", JSON.stringify(info))
 
         for (let [key, value] of formData.entries()) {
             console.log(key, value);

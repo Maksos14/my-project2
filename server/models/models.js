@@ -39,7 +39,7 @@ const PcInfo = sequelize.define('pc_info', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     title: {type: DataTypes.STRING, allowNull: false},
     description: {type: DataTypes.STRING, allowNull: false},
-})
+}, {sequelize, modelName: 'pc_infos'})
 
 User.hasOne(Basket)
 Basket.belongsTo(User)
@@ -56,8 +56,8 @@ Rating.belongsTo(User)
 Pc.hasMany(Rating)
 Rating.belongsTo(Pc)
 
-Pc.hasMany(PcInfo)
-PcInfo.belongsTo(Pc)
+Pc.hasMany(PcInfo, { as: 'info', foreignKey: 'pcId' })
+PcInfo.belongsTo(Pc, { foreignKey: 'pcId'})
 
 
 

@@ -1,83 +1,73 @@
-const uuid = require('uuid')
-const path = require('path')
-const {Pc, PcInfo} = require('../models/models')
-const ApiError = require('../error/ApiError')
+const uuid = require('uuid');
+const path = require('path');
+const { Pc, PcInfo } = require('../models/models');
+const ApiError = require('../error/ApiError');
 
 class PcController {
-    async create(req, res, next){
-        try{
-        const {name, price, info} = req.body
-        const {img} = req.files
-        let fileName = uuid.v4() + ".jpg"
-        img.mv(path.resolve(__dirname, '..', 'static', fileName))
-        
+    async create(req, res, next) {
+        try {
+            let { name, price, info } = req.body;
+            const { img } = req.files;
 
+            const fileName = uuid.v4() + ".jpg";
+            img.mv(path.resolve(__dirname, '..', 'static', fileName));
 
-        if (info){
-            info = JSON.parse(info)
-            info.array.forEach(i => 
-                PcInfo.create({
-                    title: i.title,
-                    description: pc.id
-                })
-            );
+            const pc = await Pc.create({ name, price, img: fileName });
+
+            if (info) {
+                info = JSON.parse(info);
+                info.forEach(i => {
+                    PcInfo.create({
+                        title: i.title,
+                        description: i.description,
+                        pcId: pc.id
+                    });
+                });
+            }
+
+            return res.json(pc);
+        } catch (e) {
+            next(ApiError.badRequest(e.message));
         }
-  
-
-
-        const pc = await Pc.create({name, price, img: fileName})
-
-        return res.json(pc)
-        } catch(e) {
-            next(ApiError.badRequest(e.message))
-        }
-    } 
-
-
-
-
-    async getAll(req, res){
-        let {limit, page} = req.query
-        page = page || 1
-        limit = limit || 12
-        let offset = page * limit - limit
-        let pcs;
-        pcs = await Pc.findAndCountAll({limit, offset})
-        return res.json(pcs)
     }
 
-    async getOne(req, res){
+    async getAll(req, res) {
+        try {
+            let { limit, page } = req.query;
+            page = page || 1;
+            limit = limit || 12;
+            let offset = (page - 1) * limit;
+
+            const pcs = await Pc.findAndCountAll({ limit, offset });
+            return res.json(pcs);
+        } catch (e) {
+            return res.status(500).json({ message: 'Ошибка при получении списка ПК' });
+        }
+    }
+
+    async getOne(req, res) {
         try {
             const { id } = req.params;
-    
-            // Проверяем корректность ID
+
             if (!id || isNaN(id)) {
-                return res.status(400).json({ message: 'Invalid ID' });
+                return res.status(400).json({ message: 'Некорректный ID' });
             }
-    
-            // Ищем объект Pc в базе данных
+
             const pc = await Pc.findOne({
                 where: { id },
-                include: [{ model: PcInfo, as: 'pc_infos' }] // Связь с моделью PcInfo
+                include: [{ model: PcInfo, as: 'info' }]
             });
-    
-            // Проверяем, найден ли объект
+
             if (!pc) {
-                return res.status(404).json({ message: 'PC not found' });
+                return res.status(404).json({ message: 'ПК не найден' });
             }
-    
-            // Возвращаем найденный объект в формате JSON
+
             return res.json(pc);
-    
         } catch (error) {
-            // Логируем ошибку для диагностики
-            console.error('Error fetching PC:', error);
-            return res.status(500).json({ message: 'Internal server error' });
-            console.error('Error details: ', error)
+            console.error('Ошибка при получении ПК:', error);
+            return res.status(500).json({ message: 'Внутренняя ошибка сервера' });
         }
     }
-    
 }
 
-
-module.exports = new PcController()
+module.exports = new PcController();
