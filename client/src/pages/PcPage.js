@@ -9,6 +9,7 @@ import { Context } from "../index";
 import "../styles/main.css";
 import "../styles/pcShop.css";
 
+
 const PcPage = () => {
     const [pc, setPc] = useState({ info: [] });
     const { id } = useParams();
@@ -61,6 +62,7 @@ const PcPage = () => {
             const response = await addToBasket(pc.id);
             await loadBasketData();
             console.log("Товар добавлен в корзину:", response);
+            
         } catch (e) {
             console.error("Ошибка добавления в корзину:", e);
             alert(e.response?.data?.message || 'Ошибка добавления в корзину');
@@ -120,7 +122,7 @@ const PcPage = () => {
 
 
 
-    const handleInputChange = (e) => {
+    const handleInputChange =  (e) => {
         const { name, value } = e.target;
             setNewRating(prev => ({
                 ...prev,
@@ -182,9 +184,11 @@ const PcPage = () => {
             В корзине
           </Button>
         ) : (
-          <Button variant="outline-success" onClick={handleAddToBasket}>
-            Добавить в корзину
-          </Button>
+        <Button variant="outline-success" onClick={() => {
+                handleAddToBasket(); 
+        }}>
+                Добавить в корзину
+        </Button>
         )}
       </div>
           <div className="mt-4">
@@ -218,7 +222,7 @@ const PcPage = () => {
                                     />
                                 </Form.Group>
                                 <Form.Group className="mb-3">
-                                    <Form.Label>Оценка (1-5) </Form.Label>
+                                    <Form.Label className="mr-3">Оценка (1-5) </Form.Label>
                                     <Form.Select
                                         name="value"
                                         value={newRating.value}
@@ -244,10 +248,15 @@ const PcPage = () => {
                                     />
                                 </Form.Group>
                                 
-                                   
-                                <Button variant="primary" type="submit">
-                                    Оставить отзыв
-                                </Button>
+                                <div className='nav-buttons '>
+                                    <Button 
+                                        style={{ width: "95%" }}
+                                        variant="primary" 
+                                        type="submit"
+                                    >
+                                        Оставить отзыв
+                                    </Button>
+                                </div>
                             </Form>
                         </Card.Body>
                     </Card>

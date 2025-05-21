@@ -7,6 +7,7 @@ import { observer } from 'mobx-react-lite';
 import { getBasket } from '../http/basketAPI';
 import "../styles/navbar.css";
 import "../styles/main.css";
+import logo  from '../assets/logo-mini.png';
 import { FaShoppingCart, FaSignOutAlt, FaSignInAlt, FaPlusCircle, FaUserCheck} from "react-icons/fa";
 
 
@@ -35,15 +36,15 @@ const NavBar = observer(() => {
 
     return (
         <>
-            <Navbar className="styles.blackNavbar">
+            <Navbar className='navbar'>
                 <Container>
                     <div className=" ml-2">
-                    <NavLink 
-                        style={{color:'white'}} 
-                        to={SHOP_ROUTE} 
+                    <a href = 
+                        {SHOP_ROUTE} 
                     >
-                        CustomPC
-                    </NavLink>
+                        <img src={logo}
+                        height={25}/>
+                    </a>
                     </div>
 
                     {user.isAuth ?
@@ -76,7 +77,7 @@ const NavBar = observer(() => {
                             >
                                 <FaShoppingCart />
                                 {basketCount > 0 && (
-                                    <Badge bg="danger" className="ms-3 ml-1">
+                                    <Badge bg="info" className="ms-3 ml-1">
                                         {basketCount}
                                     </Badge>
                                 )}

@@ -29,18 +29,19 @@
 
 .epic-pc-image-container {
     padding: 10px;
-    background: #000;
+    background: #ffffff;
 }
 
 .epic-pc-image {
     width: 150px;
     height: 150px;
     object-fit: contain;
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
+    margin-left: 5px;
 }
 
 .epic-pc-card:hover .epic-pc-image {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .epic-pc-content {

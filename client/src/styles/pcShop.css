@@ -36,9 +36,9 @@ body {
 }
 
 .nav-buttons button:hover {
-    background: #00f2ff;
-    transform: scale(1.05);
-    box-shadow: 0 0 10px #00f2ff; 
+    background: #00f2ffc2;
+    transform: scale(1.01);
+    box-shadow: 0 0 10px #06d4de; 
 }
 
 .nav-buttons-in-basket {

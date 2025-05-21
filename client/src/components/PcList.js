@@ -9,12 +9,15 @@ const PcList = observer(({}) => {
     const {pc} = useContext(Context)
 
     return (
-        <Row className = "d-flex">
-            {pc.pcs.map(pc =>
-                <PcItem key={pc.id} pc={pc} />
-            )}
-        </Row>
+        <Row className="d-flex">
+    {Array.isArray(pc.pcs) ? pc.pcs.map(pc => (
+        <PcItem key={pc.id} pc={pc} />
+    )) : <p>Загрузка...</p>}
+</Row>
+
     );
+
+
 });
 
 export default PcList;

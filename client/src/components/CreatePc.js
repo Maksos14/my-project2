@@ -34,22 +34,43 @@ const CreatePc = observer(({show, onHide}) => {
 
     const addPc = async () => {
     try {
-        const formData = new FormData();
-        formData.append("name", name);
-        formData.append("price", price);
-        formData.append("img", file);
-        formData.append("info", JSON.stringify(info))
 
-        for (let [key, value] of formData.entries()) {
-            console.log(key, value);
+        if (!name.trim()) {
+            throw new Error("Введите название компьютера");
+        }
+        
+        if (!price || isNaN(price) || Number(price) <= 0) {
+            throw new Error("Введите корректную цену (положительное число)");
+        }
+
+        if (!file) {
+            throw new Error("Выберите изображение компьютера");
+        }
+
+        const formData = new FormData();
+        formData.append("name", name.trim());
+        formData.append("price", String(price));
+        formData.append("img", file);
+
+        const validInfo = info.filter(i => i.title.trim() && i.description.trim());
+        if (validInfo.length > 0) {
+            formData.append("info", JSON.stringify(
+                validInfo.map(({title, description}) => ({
+                    title: title.trim(),
+                    description: description.trim()
+                }))
+            ));
         }
 
         await createPc(formData);
-
         onHide();
-    } catch (error) {
-        console.log(error)
 
+        const data = await fetchPcs();
+        pc.setPcs(data);
+
+    } catch (error) {
+        console.error("Ошибка при добавлении ПК:", error);
+        alert(error.message || "Произошла ошибка при добавлении ПК");
     }
 };
 

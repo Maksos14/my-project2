@@ -22,7 +22,6 @@ const Auth = observer(() => {
 
     const click = async () => {
         try {
-            console.log("Отправка запроса...");
             let data;
         if (isLogin) {
             data = await login(email, password)
@@ -30,12 +29,10 @@ const Auth = observer(() => {
         } else {
             data = await registration(email, password)
         }
-        console.log("Ответ сервера:", user);
         user.setUser(data)
         user.setIsAuth(true)
         
         } catch (e) {
-            console.error("Ошибка в click():", e)
             alert(e.response.data.message)
         }
     }

@@ -5,19 +5,10 @@
     border-bottom: 1px solid #333; /* Тонкая серая граница снизу */
   }
   
-  .blackNavbar .navbar-brand,
-  .blackNavbar .nav-link {
-    color: white !important; /* Белый цвет текста */
-  }
-  
-  .blackNavbar .navbar-toggler {
-    border-color: rgba(255,255,255,0.5); /* Цвет иконки "бургер" */
-  }
-
   .card, .modal-content, .dropdown-menu, 
 .list-group-item, .form-control, 
-.table, .bg-white, .navbar {
-  background-color: #000 !important;
+.table, .bg-white {
+  background-color: #1f1f1f !important;
   border-color: #333 !important;
   color: #fff !important;
 }

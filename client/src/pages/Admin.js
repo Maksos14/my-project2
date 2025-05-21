@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import CreatePc from "../components/CreatePc"
-
+import "../styles/pcShop.css";
 
 const Admin = () => {
     
     const [pcVisible, setPcVisible] = useState(false)
 
     return (
-        <Container className="d-flex flex-column">
+        <Container className="nav-buttons">
             <Button 
-                variant="outline-dark" 
-                className="mt-2"
+                style={{ width: "65%" }}
                 onClick={() => setPcVisible(true)}
             >
-                Добавить устройство
+                Добавить компьютер
             </Button>
         <CreatePc show={pcVisible} onHide={() => setPcVisible(false)}/>
         </Container>

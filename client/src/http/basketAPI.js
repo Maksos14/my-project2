@@ -6,9 +6,18 @@ export const addToBasket = async (pcId) => {
 };
 
 export const getBasket = async () => {
-    const { data } = await $authHost.get('api/basket');
-    return data;
+    const token = localStorage.getItem("token");
+    if (!token) return { basket_pcs: [] }; 
+    try {
+        const response = await $authHost.get('api/basket', {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return response.data;
+    } catch {
+        return { basket_pcs: [] };
+    }
 };
+
 
 export const removeFromBasket = async (pcId) => {
     const { data } = await $authHost.delete(`api/basket/${pcId}`);
