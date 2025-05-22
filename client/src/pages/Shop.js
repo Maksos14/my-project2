@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import TypeBar from "../components/TypeBar";
 import PcList from "../components/PcList";
 import { Context } from "..";
 import { fetchPcs } from "../http/pcAPI";
@@ -31,7 +30,6 @@ const Shop = observer( () => {
         <Container className="fade-in">
             <Row className="mt-3">
                 <Col md={3} className="dark-column">
-                    <TypeBar />
                 </Col>
                 <Col md={9}>
 
